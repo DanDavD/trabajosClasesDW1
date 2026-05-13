@@ -27,4 +27,24 @@ export class ProductsService {
     }
     return { ...product };
   }
+
+  deleteProduct(productId: string) {
+    const index = this.products.findIndex((prod) => prod.id === productId);
+
+    if (index < 0) {
+      throw new NotFoundException('couldnt find product.');
+    }
+
+    this.products.splice(index, 1);
+  }
+
+  updatePrice(productId: string, price: number) {
+    const product = this.products.find((prod) => prod.id === productId);
+
+    if (!product) {
+      throw new NotFoundException('Producto no encontrado.');
+    }
+
+    product.price = price;
+  }
 }
