@@ -36,4 +36,20 @@ export class ProductsController {
   getProductByID(@Param('id') prodID: string) {
     return this.productService.getSingleProduct(prodID);
   }
+
+  @Delete(':id')
+  deleteProduct(@Param('id') prodId: string) {
+    this.productService.deleteProduct(prodId);
+    return 'Producto eliminado';
+  }
+
+  @Patch(':id')
+  updateProductPrice(
+    @Param('id') prodId: string,
+    @Body('price') newPrice: number,
+  ) {
+    this.productService.updatePrice(prodId, newPrice);
+
+    return 'price updated successfully';
+  }
 }
